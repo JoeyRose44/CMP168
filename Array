@@ -1,0 +1,188 @@
+//For Homework 2
+import java.util.Arrays;
+import java.util.Scanner;
+public class Array {
+	
+	public static int sum(int[] arr) {
+		int sum = 0;
+		int i;
+		for(i = 0; i < arr.length; ++i) {
+			sum = sum + arr[i];
+		}
+		return sum;
+	}
+	
+	public static int sum(int[] arr, int firstIndex, int lastIndex) {
+		int i;
+		if((firstIndex < 0) || (lastIndex < 0) || (firstIndex >= arr.length) || (lastIndex >= arr.length) || (firstIndex > lastIndex)) {
+			return -666;
+		}
+		int sum = 0;
+		for(i = firstIndex; i <= lastIndex; ++i) {
+			sum = sum + arr[i];
+		}
+		return sum;
+	}
+		
+	public static double average(int[] arr) {
+		double avg = 0;
+		int i;
+		double sum = 0.0;
+		int count = 0;
+		for(i = 0; i < arr.length; ++i) {
+			sum = sum + arr[i];
+			count++;
+		}
+		avg = sum / count;
+		return avg;
+	}
+	
+	public static double average(int[] arr, int firstIndex, int lastIndex) {
+		double avg = 0.0;
+		int i;
+		double sum = 0.0;
+		int count = 0;
+		if((firstIndex < 0) || (lastIndex < 0) || (firstIndex >= arr.length) || (lastIndex >= arr.length) || (firstIndex > lastIndex)) {
+			return -666.0;
+		}
+		for(i = firstIndex; i <= lastIndex; ++i) {
+			sum = sum + arr[i];
+			count++;
+		}
+		avg = sum / count;
+		return avg;
+	}
+	
+	public static int maxValue(int[] arr) {
+		int max = arr[0];
+		int i;
+		for(i = 1; i < arr.length; ++i) {
+			if(arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+	
+	public static int maxValue(int[] arr, int firstIndex, int lastIndex) {
+		if((firstIndex < 0) || (lastIndex < 0) || (firstIndex >= arr.length) || (lastIndex >= arr.length) || (firstIndex > lastIndex)) {
+			return -666;
+		}
+		int max = arr[firstIndex];
+		int i;
+		for(i = firstIndex + 1; i <= lastIndex; ++i) {
+			if(arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+
+	
+	public static int indexOfFirstMaxValue(int[] arr) {
+		int max = maxValue(arr);
+		int maxI = 0;
+		int i;
+		for(i = 0; i < arr.length; ++i) {
+			if(arr[i] == max) {
+				maxI = i;
+			}
+		}
+		return maxI;
+	}
+	
+	public static int indexOfFirstMaxValue(int[] arr, int firstIndex, int lastIndex) {
+		if((firstIndex < 0) || (lastIndex < 0) || (firstIndex >= arr.length) || (lastIndex >= arr.length) || (firstIndex > lastIndex)) {
+			return -1;
+		}
+		int max = maxValue(arr, firstIndex, lastIndex);
+		int maxI = 0;
+		int i;
+		for(i = firstIndex; i <= lastIndex; ++i) {
+			if(arr[i] == max) {
+				maxI = i;
+			}
+		}
+		return maxI;
+	}
+	
+	public static int numberOfBelowAverageElements(int[] arr) {
+		double avrg = average(arr);
+		int below = 0;
+		int i;
+		for(i = 0; i < arr.length; ++i) {
+			if(arr[i] < avrg) {
+				below++;
+			}
+		}
+		return below;
+	}
+	
+	public static int numberOfBelowAverageElements(int[] arr, int firstIndex, int lastIndex) {
+		double avrg = average(arr);
+		int below = 0;
+		int i;
+		if((firstIndex < 0) || (lastIndex < 0) || (firstIndex >= arr.length) || (lastIndex >= arr.length) || (firstIndex > lastIndex)) {
+			return -666;
+		}
+		for(i = firstIndex; i <= lastIndex; ++i) {
+			if(arr[i] < avrg) {
+				below++;
+			}
+		}
+		return below;
+	}
+	
+	public static void rotateElements(int[] arr) {
+		int tempVal = arr[arr.length - 1];
+		int i;
+		for(i = arr.length - 1; i > 0; --i) {
+			arr[i] = arr[i - 1];
+		}
+		arr[0] = tempVal;
+		//System.out.println(arr);
+	}
+	
+	public static void rotateElements(int[] arr, int rotationCount) {
+		int i;
+        for(i = 0; i < rotationCount; i++) {
+            rotateElements(arr);
+        }
+	}
+	
+	public static void reverseArray(int[] arr) {
+		int i;
+		int temp;
+		for(i = 0; i < (arr.length / 2); ++i) {
+			temp = arr[i];
+			arr[i] = arr[arr.length - 1 - i];
+			arr[arr.length - 1 - i] = temp;
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scnr = new Scanner(System.in);
+		int[] myArray = {45, 22, 18, 89, 82, 79, 15, 69, 100, 55, 48, 72, 16, 98, 57, 75, 44, 32, 21, 14, 7, 16, 49, 58, 72};
+		int firstIndex = scnr.nextInt(), lastIndex = scnr.nextInt();
+		System.out.println("Sum of whole array = " + sum(myArray));
+		System.out.println("Sum of elements " + firstIndex + "-" + lastIndex +  " = "  + sum(myArray, firstIndex, lastIndex));
+		System.out.println("Average of whole array = " + average(myArray));
+		System.out.println("Average of elements " + firstIndex + "-" + lastIndex +  " = " + average(myArray, firstIndex, lastIndex));
+		System.out.println("Max of whole array = " + maxValue(myArray));
+		System.out.println("Max of whole array = "+ firstIndex + "-" + lastIndex +  " = " + maxValue(myArray, 12, 18));
+		System.out.println("Index of first Max of whole array = " + indexOfFirstMaxValue(myArray));
+		System.out.println("Index of first Max of whole array = " + firstIndex + "-" + lastIndex +  " = " + indexOfFirstMaxValue(myArray, 12, 18));
+		System.out.println("Count of elements below average of whole array = " + numberOfBelowAverageElements(myArray));
+		System.out.println("Count of elements below average of elements " + firstIndex + "-" + lastIndex +  " = " + numberOfBelowAverageElements(myArray, 12, 18));
+		rotateElements(myArray);
+		System.out.println(Arrays.toString(myArray));
+		rotateElements(myArray, 5);
+		System.out.println(Arrays.toString(myArray));
+		reverseArray(myArray);
+		System.out.println(Arrays.toString(myArray));
+	}
+
+}
+
+		
