@@ -1,0 +1,61 @@
+public class Person extends Passenger{
+
+	private int numOffspring;
+	
+	public Person() {//default constructor
+		numOffspring = 0;
+	}
+	
+	public Person(int numOffspring) {//overload constructor
+		if(numOffspring < 0) {
+			numOffspring = 0;
+		}
+		else {
+			this.numOffspring = numOffspring;
+		}
+	}
+	
+	public Person(String name, int birthYear, double weight, double height,
+			char gender, int numCarryon, int numOffspring) {
+		super(name, birthYear, weight, height, gender, numCarryon);
+		if(numOffspring < 0) {
+			numOffspring = 0;
+		}
+		else {
+			this.numOffspring = numOffspring;
+		}
+	}
+	
+	public void setNumOffspring(int numOffspring) {
+		if(numOffspring < 0) {
+			numOffspring = 0;
+		}
+		else {
+			this.numOffspring = numOffspring;
+		}
+	}
+	
+	public int getNumOffspring() {
+		return this.numOffspring;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + String.format("Person: Number of Offspring: %4d\n", numOffspring);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Person) {
+			return (super.equals(obj) && (this.numOffspring == ((Person)obj).numOffspring));
+		}
+		return false;
+	}
+	
+	@Override
+	public void printDetails() {
+		super.printDetails();
+		System.out.printf("Person: Number of Offspring: %4d\n", numOffspring);
+	}
+	
+}
