@@ -1,0 +1,104 @@
+public class Infant extends Person{
+
+	private class InfantToy{
+		private String infantToyName;
+		private int infantToyRating;
+		
+		public InfantToy(String infantToyName , int infantToyRating) {
+			this.infantToyName = infantToyName;
+			this.infantToyRating = infantToyRating;
+		}
+		
+		public String toString() {
+			return (String.format("InfantToy: Toy Name: %20s | Rating %4d\n", infantToyName, infantToyRating)); 
+		}
+	}
+	
+	private InfantToy[] toys;
+	private int numInfantToys;
+	
+	public Infant(){
+		super();
+		numInfantToys = 0;
+		toys = new InfantToy [10];
+	}
+	
+	public Infant(String name, int birthYear, double weight, double height, char gender, int numCarryOn) {
+		super(name, birthYear, weight, height, gender, numCarryOn, 0);
+		numInfantToys = 0;
+		toys = new InfantToy [10];
+	}
+	
+	public void addInfantToy(String name, int rating) {
+		if(numInfantToys < toys.length) {
+			toys[numInfantToys] = new InfantToy(name, rating);
+			numInfantToys++;
+		}
+		else {
+			System.out.println("toys has reached capacity of 10");
+		}
+	}
+	
+	public int getNumInfantToys() {
+		return this.numInfantToys;
+	}
+	
+	public String getInfantToyName(int index) {
+		if(index >= 0 && index < numInfantToys) {
+			return toys[index].infantToyName;
+		}
+		else {
+			return "invalid index " + index;
+		}
+	}
+	
+	public int getInfantToyRating(int index) {
+		if(index >= 0 && index < numInfantToys) {
+			return toys[index].infantToyRating;
+		}
+		else {
+			return -1;
+		}
+	}
+	
+	public String getInfantToyAsString(int index) {
+		if(index >= 0 && index < numInfantToys) {
+			return toys[index].toString();
+		}
+		else {
+			return "invalid index " + index;
+		}
+	}
+	
+	public int getHighestInfantToyRating() {
+		int max = -1;
+		int i;
+		for(i = 0; i < numInfantToys; i++) {
+			if(toys[i].infantToyRating > max) {
+				max = toys[i].infantToyRating;
+			}
+		}
+		return max;
+	}
+	
+	@Override
+	public String toString() {
+		int i;
+		String str = super.toString();
+		str = str + String.format("Infant: Number of Toy: %4d | Infant Toys: \n", numInfantToys);
+		for(i = 0; i < numInfantToys; i++)
+			str = str + toys[i].toString();
+		return str;
+	}
+	
+	@Override
+	public void printDetails() {
+		int i;
+		super.printDetails();
+		System.out.printf("Infant: Number of Toy: %4d | Infant Toys: \n", numInfantToys);
+		for(i = 0; i < numInfantToys; i++) {
+			 System.out.println(toys[i].toString());
+		}
+	}
+	
+}
